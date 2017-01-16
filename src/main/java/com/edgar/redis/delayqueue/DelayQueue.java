@@ -1,4 +1,4 @@
-package com.edgar.redis;
+package com.edgar.redis.delayqueue;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Response;

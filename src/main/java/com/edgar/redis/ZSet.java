@@ -13,7 +13,8 @@ import java.util.Set;
  */
 public class ZSet {
   public static void main(String[] args) {
-    Jedis jedis = new Jedis("10.4.14.60");
+    Jedis jedis = new Jedis("10.4.7.220", 6379);
+    jedis.auth("123");
     jedis.zadd("zyz-test", 1, "foo");
     jedis.zadd("zyz-test", 0, "bar");
     jedis.zadd("zyz-test", 2, "hoho");
