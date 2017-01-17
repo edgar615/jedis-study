@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class LimitTest3 {
   public static void main(String[] args) throws InterruptedException, IOException {
+    System.out.println(-1 ^ (-1 << 10));
+
     Jedis jedis = new Jedis("10.11.0.31");
     System.out.println(new LimitTest3().accessLimit("192.168.1.100", jedis));
     System.out.println(new LimitTest3().accessLimit("192.168.1.100", jedis));

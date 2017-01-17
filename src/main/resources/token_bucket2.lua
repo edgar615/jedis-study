@@ -7,10 +7,7 @@ local key = "rate.limit:" .. KEYS[1] --限流KEY
 
 --借助TIME 计算当前请求的时间
 local current_time = redis.pcall('TIME')
-local current_second = current_time[1]
-local current_microsecond = current_time[2]
-local current_millisecond = math.floor(tonumber(current_microsecond) / 1000)
-local current_timestamp_ms = tonumber(current_second ... current_millisecond)
+local current_timestamp_ms = tonumber(current_time[1]) * 1000 + math.floor(tonumber(current_time[2]) / 1000)
 
 
  --last_drip:上次请求的时间,content：剩余的令牌数量
