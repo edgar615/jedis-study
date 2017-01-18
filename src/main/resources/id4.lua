@@ -27,7 +27,7 @@ if num_ids > max_sequence then
 end
 
 local num_ids = tonumber(ARGV[1]) --需要获取的ID数量
-local end_sequence = redis.call('INCRBY', sequence_key, num_ids) --最大的序列
+local end_sequence = redis.call('INCRBY', sequence_key, num_ids) -1 --最大的序列
 local start_sequence = end_sequence - num_ids + 1 --最小的序列
 
 if end_sequence >= max_sequence then
@@ -35,10 +35,13 @@ if end_sequence >= max_sequence then
   如果生成的序列大于最大的序列值，设置锁标识并设置过期时间为1毫秒
   --]]
   redis.log(redis.LOG_NOTICE, 'Rolling sequence back to the start, locking for 1ms.')
-  redis.call('SET', sequence_key, '-1')
+  --redis.call('SET', sequence_key, '-1')
   redis.call('PSETEX', lock_key, 1, 'lock')
   end_sequence = max_sequence
 end
+
+--1毫秒后将自增序列删除
+redis.call('PEXPIRE', sequence_key, 1)
 
 --将移位计算交给客户端实现
 local current_time = redis.call('TIME')

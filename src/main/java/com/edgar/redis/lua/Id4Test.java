@@ -22,7 +22,7 @@ public class Id4Test {
     Jedis jedis = new Jedis("10.11.0.31");
     List<String> keys = new ArrayList<String>();
     List<String> argv = new ArrayList<String>();
-    argv.add("5");
+    argv.add("2500");
     for (int i = 0; i < 5000; i++) {
       List<Long> result =
               new ArrayList<Long>(
